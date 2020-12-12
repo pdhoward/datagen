@@ -1,0 +1,98 @@
+{ "venue":
+	{
+		"id": 63288,
+		"eid": ["Whole Foods"],
+		"mid": ["Grocery"],
+		"gid": ["Austin Area"],
+		"lid": ["Affluent Estates"],
+		"isActive": true,
+		"title": "Corner Grocery Store",
+		"name": "Corner Grocery Store",
+		"slug": "",
+		"overview": "Libero omnis aut odio quia est. Reprehenderit sed quam ut est eum ullam facere et. Dolorem et voluptatem molestiae vero et. Minus vero sed et quia. Doloribus quisquam cum corporis molestiae.",
+		"stage": "publish",		
+		"propertyType": "Commercial",
+		"condition": "Poor",
+		"traffic": 2200,
+		"rating": 3,
+        "ratingCount": 1,
+        "website": "http://www.khinternational.com/",
+        "phone": "4049201526",
+		"termsAndCondition": "Qui sit omnis rerum rerum natus cumque earum qui. Optio facilis doloremque. Corrupti est est aperiam molestias animi animi minima neque. Enim numquam et consectetur dicta error doloribus molestiae quibusdam. Quia est est.",
+		"attributes": [
+			{
+				"id": 42453,
+				"weekly traffic": 8000
+			},
+			{
+				"id": 30289,
+				"daily peak": "Monday"
+			},
+			{
+				"id": 5821,
+				"hours of operation": "https://ogp.me/"
+			}			
+		],
+		"images": {
+			"id": 90096,
+			"url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-1.jpg",
+			"thumb_url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-1_thumb.jpg"
+		},
+		"image": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-1_thumb.jpg",
+		"location": {
+			"id": 67404,
+			"lat": 40.706877,
+            "lng": -74.011265,
+            "type": "Point",
+			"formattedAddress": "52623 Donnie Roads",
+			"zipcode": "68225-1064",
+			"city": "Seattle",
+			"state_long": "Washington",
+			"state_short": "WY",
+			"country_long": "United States",
+            "country_short": "USA",
+            "county": "Mecklenburg",
+            "region": "SouthEast"
+		},
+		"gallery": [
+			{
+				"id": 11287,
+				"url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-2_thumb.jpg"
+			},
+			{
+				"id": 51759,
+				"url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-3_thumb.jpg"
+			},
+			{
+				"id": 1888,
+				"url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-4_thumb.jpg"
+			}
+		],
+		"categories": [
+			{
+				"id": 87372,				
+				"name": "supermarket",
+				"image": {
+					"id": 22552,
+					"url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-5.jpg"
+				}
+			},
+			{
+				"id": 96762,				
+				"name": "grocer",
+				"image": {
+					"id": 77761,
+					"url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-6.jpg"
+				}
+			}
+		],
+		"rates": [
+			{"sch102": 1607447509},
+			{"sch117": 1575825109},
+			{"sch127": 1544289109}
+		],		
+		"isNegotiable": false,
+		"timestamp": null,
+		"created": null
+	}
+}
