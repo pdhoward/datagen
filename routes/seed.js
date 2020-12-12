@@ -88,8 +88,7 @@ const seed = (router) => {
           break
       }
 
-      // remove redundant fields      
-      delete newDoc.name
+      // remove redundant fields  
       delete newDoc.location
       delete newDoc.category
       delete newDoc.latitude
@@ -115,17 +114,17 @@ const seed = (router) => {
       }
       
       newDoc.timestamp = Date.now()
-      newDoc.created = Date.now()
+      newDoc.updatedOn = Date.now()
 
       console.log(newDoc)
       // update the database with new object
       let objId = newDoc._id
-      /*
+      
       let result = await db.collection('markets')
-        .updateOne({_id: ObjectId(objId)}, {$set: newDoc})
+        .replaceOne({_id: ObjectId(objId)}, newDoc)
       console.log(result.modifiedCount) 
       if (result.modifiedCount) {cnt = cnt + 1}
-      */
+      
       cursor.close()
       break
       
@@ -137,11 +136,7 @@ const seed = (router) => {
 }
 
 module.exports = seed
-/*
-let data = await seeder()
-        let html = `<h2>${data.result.n} records inserted!</h2>`
-        res.send(html)
-*/
+
  
   
   
