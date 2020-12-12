@@ -2,6 +2,9 @@
 const {addresses} = require('../data/addresses1000.json')
 
 // random data 
+const randomRange = (min, max) => { 
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
 
 const enterprises = [
     {
@@ -91,5 +94,6 @@ const random = () => {
 }
                     
 module.exports = {
-    random
+    random,
+    randomRange
 }
