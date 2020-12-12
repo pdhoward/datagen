@@ -20,13 +20,13 @@ Mongo.connect(url, { useUnifiedTopology: true }, ((err, client) => {
 const seed = (router) => {
 	router.use(async(req, res, next) => {  
     let data = await random()
-    console.log(data)
+    
     const cursor = db.collection('markets').find({});
     for await (const doc of cursor) {      
       
       // merge db object and venue template
       let newDoc = {...doc, ...venue}
-      console.log(newDoc)
+      
       // update newDoc with random data  
       newDoc.timestamp = Date.now()
       if (data.enterprise[0].name == 'local') {
@@ -115,20 +115,18 @@ const seed = (router) => {
       
       newDoc.timestamp = Date.now()
       newDoc.updatedOn = Date.now()
-
-      console.log(newDoc)
+    
       // update the database with new object
       let objId = newDoc._id
       
       let result = await db.collection('markets')
         .replaceOne({_id: ObjectId(objId)}, newDoc)
-      console.log(result.modifiedCount) 
-      if (result.modifiedCount) {cnt = cnt + 1}
-      
-      cursor.close()
-      break
+     
+      if (result.modifiedCount) {cnt = cnt + 1}    
       
     }
+    
+    cursor.close()
     let html = `<h2>${cnt} records modified!</h2>`
     res.send(html)   
     next()
