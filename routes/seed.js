@@ -35,15 +35,12 @@ const seed = (router) => {
     const jsonArray = await csv().fromFile(marketsFilePath)  
     const filter = jsonArray.filter(o => o.marketid != "")   // delete blanks   
     console.log(`The array of stores and locations has ${filter.length} entries`)
-
-    // reduce size of array for testing
-    let arraycnt = 0    
+      
     // iterate through the spreadsheet, creating test venue objects
-    const result = filter.map((f) => {
-      arraycnt = arraycnt + 1
-      if (arraycnt > 10) return
+    const result = filter.map((f) => {      
       // create a doc object with a set of random data for populating a test object
-      let data = random()     
+      let data = random()       
+      
       // create test document and assign address and coordinates
       let doc = {}
       doc.marketid = uuidv4()
@@ -142,11 +139,10 @@ const seed = (router) => {
 
       newDoc.timestamp = Date.now()
       newDoc.updatedOn = Date.now()
-      return newDoc
+      
+      return JSON.parse(JSON.stringify(newDoc));
     })
-
-    console.log(`The transformed set of venues has ${result.length} entries`)   
-     
+    
     await db.collection('venues')
       .deleteMany({})
       .then((res) => {

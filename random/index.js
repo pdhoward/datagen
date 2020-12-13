@@ -84,11 +84,7 @@ const random = () => {
             data.enterprise = [{name: 'local'}]
         } else {
             data.enterprise = [enterprises[Math.floor(Math.random() * enterprises.length)]]
-        }
-        if (cnt < 10){
-            console.log(cnt % 5)
-            console.log(data)
-        }
+        }      
         return data
 }
                     
