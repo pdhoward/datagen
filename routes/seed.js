@@ -4,6 +4,7 @@ const ObjectId = require('mongodb').ObjectID;
 const {random} = require('../random')
 const {randomRange} = require('../random')
 const {venue} = require('../data/venue.json')
+const {storenames} = require('../data/storenames')
 const { g, b, gr, r, y } =  require('../console')
 const url = process.env.ATLAS_URI
 
@@ -18,16 +19,54 @@ Mongo.connect(url, { useUnifiedTopology: true }, ((err, client) => {
 }))
 
 const seed = (router) => {
-	router.use(async(req, res, next) => {  
-    let data = await random()
-    
-    const cursor = db.collection('markets').find({});
-    for await (const doc of cursor) {      
-      
-      // merge db object and venue template
+	router.use(async(req, res, next) => {
+
+    // create an array of retail store names to use for random assignment to test object
+    const retailFilePath='./data/retailstores.csv'
+    const names= await csv().fromFile(retailFilePath)   
+    const reduceArray = names.slice(0, 300)
+    const selectnames = reduceArray.map(r => r.dba)
+    const newRandomNames = [...selectnames, ...storenames]
+    console.log(`The array of random store names has ${newRandomNames.length} entries`)
+
+  // ingest spreadsheet of retail stores and locations
+    const marketsFilePath='./data/markets.csv'
+    const jsonArray = await csv().fromFile(marketsFilePath)  
+    const filter = jsonArray.filter(o => o.marketid != "")   // delete blanks   
+    console.log(`The array of stores and locations has ${filter.length} entries`)
+
+    // iterate through the spreadsheet, creating test venue objects
+    const result = filter.map(f => {
+
+      // create a doc object with a set of random data for populating a test object
+      let data = await random()
+
+      // create test document and assign address and coordinates
+      let doc = {}
+      doc.marketid = uuidv4()
+      doc.location ={}
+      doc.location.type = 'Point'
+      doc.location.coordinates = []
+      let lon = data.address.coordinates.lng 
+      let lat = data.address.coordinates.lat 
+      doc.location.coordinates.push(lon)
+      doc.location.coordinates.push(lat)
+      doc.address = data.address
+
+      // merge template properties from venue
+       
       let newDoc = {...doc, ...venue}
-      
-      // update newDoc with random data  
+
+      // assign a random store name or the name from spreadsheet
+      if (f.name == null) {
+        newDoc.name = newRandomNames[Math.floor(Math.random() * newRandomNames.length)]       
+        newDoc.title = newDoc.name
+      } else {
+        newDoc.name = f.name
+        newDoc.title = f.name
+      }
+
+      // assign random tags for enterprise, geo, lifestyle  
       newDoc.timestamp = Date.now()
       if (data.enterprise[0].name == 'local') {
         newDoc.eid.splice(0, 1, 'local')
@@ -42,7 +81,7 @@ const seed = (router) => {
       let lid = data.lifemode
       newDoc.lid.splice(0, 1, lid)
 
-      // custom assign a market
+      // custom assign a market tag based on value of enterprise
       let ent = newDoc.eid[0]
       switch(ent) {
         case 'Marriot':
@@ -88,45 +127,30 @@ const seed = (router) => {
           break
       }
 
-      // remove redundant fields  
-      delete newDoc.location
-      delete newDoc.category
-      delete newDoc.latitude
-      delete newDoc.longitude
-      delete newDoc.zipcode
-      delete newDoc.address
-      delete newDoc.dailytraffic
-      delete newDoc.description
-
-      // update location and coordinates for mongodb
-      newDoc.address = data.address
-      let lng = data.address.coordinates.lng
-      let lat = data.address.coordinates.lat
-      if (newDoc.location) {
-        newDoc.location.coordinates.splice(0, 1, lng )
-        newDoc.location.coordinates.splice(1, 1, lat )
-      } else {
-        newDoc.location = {}
-        newDoc.location.type = "Point"
-        newDoc.location.coordinates = []
-        newDoc.location.coordinates.splice(0, 1, lng )
-        newDoc.location.coordinates.splice(1, 1, lat )
-      }
-      
       newDoc.timestamp = Date.now()
       newDoc.updatedOn = Date.now()
-    
-      // update the database with new object
-      let objId = newDoc._id
-      
-      let result = await db.collection('markets')
-        .replaceOne({_id: ObjectId(objId)}, newDoc)
-     
-      if (result.modifiedCount) {cnt = cnt + 1}    
-      
-    }
-    
-    cursor.close()
+    })
+
+    console.log(`The tarnsformed set of venues has ${result.length} entries`)   
+     /*
+    await db.collection('venues')
+      .deleteMany({})
+      .then((res) => {
+        console.log(`${res.deletedCount} records deleted!`)
+      })
+      .then(() => db.collection('venues').insertMany(result))
+      .then(data => {
+        console.log(`${data.result.n} records inserted!`); 
+        cnt = data.result.n        
+        db.collection.createIndex({location: "2dsphere"})
+      //process.exit(0)  
+      })
+      .catch(err => {
+        console.log(error)
+        process,exit(1)
+      })          
+    */
+    console.log(result[0])
     let html = `<h2>${cnt} records modified!</h2>`
     res.send(html)   
     next()
