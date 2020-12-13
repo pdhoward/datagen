@@ -76,8 +76,7 @@ const lifemodes = [
                     'Next Wave',
                     'Scholars and Patriots' ]
 let cnt = 0
-const random = () => {
-    return new Promise((resolve, reject) => {
+const random = () => {   
         let data = {}
         cnt++
         data.lifemode = lifemodes[Math.floor(Math.random() * lifemodes.length)]
@@ -89,8 +88,7 @@ const random = () => {
         } else {
             data.enterprise = [enterprises[Math.floor(Math.random() * enterprises.length)]]
         }
-        resolve(data)
-    })   
+        return data     
 }
                     
 module.exports = {

@@ -1,4 +1,4 @@
-{ storenames: [
+const storenames = [
     'Cherians International Groceries',
     'International Supermarket',
     'International Food Concepts', 
@@ -74,4 +74,5 @@
     'The Fresh Market',
     'Quiubi Internationai Market'
   ]
-}
+
+module.exports = storenames

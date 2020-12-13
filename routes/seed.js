@@ -1,10 +1,11 @@
 
-const Mongo = require('mongodb').MongoClient;
-const ObjectId = require('mongodb').ObjectID;
-const {random} = require('../random')
-const {randomRange} = require('../random')
-const {venue} = require('../data/venue.json')
-const {storenames} = require('../data/storenames')
+const Mongo =               require('mongodb').MongoClient;
+const csv=                  require('csvtojson')
+const { v4: uuidv4 } =      require('uuid')
+const {random} =            require('../random')
+const {randomRange} =       require('../random')
+const {venue} =             require('../data/venue.json')
+const storenames =          require('../data/storenames')
 const { g, b, gr, r, y } =  require('../console')
 const url = process.env.ATLAS_URI
 
@@ -36,11 +37,10 @@ const seed = (router) => {
     console.log(`The array of stores and locations has ${filter.length} entries`)
 
     // iterate through the spreadsheet, creating test venue objects
-    const result = filter.map(f => {
+    const result = filter.map((f) => {
 
       // create a doc object with a set of random data for populating a test object
-      let data = await random()
-
+      let data = random()     
       // create test document and assign address and coordinates
       let doc = {}
       doc.marketid = uuidv4()
@@ -64,10 +64,11 @@ const seed = (router) => {
       } else {
         newDoc.name = f.name
         newDoc.title = f.name
+        newDoc.website = f.website
+        newDoc.phone = f.phone
       }
 
-      // assign random tags for enterprise, geo, lifestyle  
-      newDoc.timestamp = Date.now()
+      // assign random tags for enterprise, geo, lifestyle        
       if (data.enterprise[0].name == 'local') {
         newDoc.eid.splice(0, 1, 'local')
         newDoc.image = 'https://placeimg.com/200/200/arch/grayscale'
@@ -129,9 +130,10 @@ const seed = (router) => {
 
       newDoc.timestamp = Date.now()
       newDoc.updatedOn = Date.now()
+      return newDoc
     })
 
-    console.log(`The tarnsformed set of venues has ${result.length} entries`)   
+    console.log(`The transformed set of venues has ${result.length} entries`)   
      /*
     await db.collection('venues')
       .deleteMany({})
