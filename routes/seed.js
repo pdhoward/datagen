@@ -36,9 +36,12 @@ const seed = (router) => {
     const filter = jsonArray.filter(o => o.marketid != "")   // delete blanks   
     console.log(`The array of stores and locations has ${filter.length} entries`)
 
+    // reduce size of array for testing
+    let arraycnt = 0    
     // iterate through the spreadsheet, creating test venue objects
     const result = filter.map((f) => {
-
+      arraycnt = arraycnt + 1
+      if (arraycnt > 10) return
       // create a doc object with a set of random data for populating a test object
       let data = random()     
       // create test document and assign address and coordinates
@@ -118,6 +121,15 @@ const seed = (router) => {
             return a
           })
           break
+        //
+        case 'Dunkin Donut':
+          newDoc.mid.splice(0, 1,'Specialty Stores')
+          traffic = randomRange(1000, 3000)
+          newDoc.attributes.map((a) => {
+            if (a.id == 42453) a.weeklyTraffic = traffic
+            return a
+          })
+          break
         default:
           newDoc.mid.splice(0, 1,'Supermarkets')
           traffic = randomRange(4000, 15000)
@@ -134,7 +146,7 @@ const seed = (router) => {
     })
 
     console.log(`The transformed set of venues has ${result.length} entries`)   
-     /*
+     
     await db.collection('venues')
       .deleteMany({})
       .then((res) => {
@@ -144,15 +156,15 @@ const seed = (router) => {
       .then(data => {
         console.log(`${data.result.n} records inserted!`); 
         cnt = data.result.n        
-        db.collection.createIndex({location: "2dsphere"})
+        db.collection('venues').createIndex({location: "2dsphere"})
       //process.exit(0)  
       })
       .catch(err => {
-        console.log(error)
+        console.log(err)
         process,exit(1)
       })          
-    */
-    console.log(result[0])
+    
+   
     let html = `<h2>${cnt} records modified!</h2>`
     res.send(html)   
     next()

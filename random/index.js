@@ -38,10 +38,7 @@ const enterprises = [
     {
         name: 'YMCA',
         image: 'https://res.cloudinary.com/stratmachine/image/upload/v1607716467/brands/ymca_s2lpun.png'
-    },
-    {   
-        name: 'local'
-    }
+    }   
 ]
 
 const geography = ['Northeast', 'Midwest', 'South', 'West', 'Chicago Area', 'Los Angeles Area', 'Atlanta Area', 'New York Area', 'Austin Area']
@@ -88,7 +85,11 @@ const random = () => {
         } else {
             data.enterprise = [enterprises[Math.floor(Math.random() * enterprises.length)]]
         }
-        return data     
+        if (cnt < 10){
+            console.log(cnt % 5)
+            console.log(data)
+        }
+        return data
 }
                     
 module.exports = {
