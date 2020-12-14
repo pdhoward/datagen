@@ -3,7 +3,7 @@
 		"enterprise": ["Whole Foods"],
 		"market": ["Grocery"],
 		"geography": ["Austin Area"],
-		"lifestyle": ["Affluent Estates"],
+		"lifemode": ["Affluent Estates"],
 		"isActive": true,
 		"isVerified": {
 			"verifiedDate": null,
