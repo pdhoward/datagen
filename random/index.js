@@ -80,7 +80,7 @@ const random = () => {
         data.geography = geography[Math.floor(Math.random() * geography.length)]
         data.market = markets[Math.floor(Math.random() * markets.length)]
         data.address = addresses[Math.floor(Math.random() * addresses.length)]
-        if (cnt % 5) {
+        if (cnt % 3) {
             data.enterprise = [{name: 'local'}]
         } else {
             data.enterprise = [enterprises[Math.floor(Math.random() * enterprises.length)]]

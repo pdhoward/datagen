@@ -1,16 +1,16 @@
 { "venue":
 	{		
-		"eid": ["Whole Foods"],
-		"mid": ["Grocery"],
-		"gid": ["Austin Area"],
-		"lid": ["Affluent Estates"],
+		"enterprise": ["Whole Foods"],
+		"market": ["Grocery"],
+		"geography": ["Austin Area"],
+		"lifestyle": ["Affluent Estates"],
 		"isActive": true,
 		"isVerified": {
 			"verifiedDate": null,
 			"verifiedMethod": "inspection",
 			"result": true
 		},
-		"title": "Corner Grocery Store",
+		"label": "Corner Grocery Store",
 		"name": "Corner Grocery Store",
 		"slug": "",
 		"overview": "Libero omnis aut odio quia est. Reprehenderit sed quam ut est eum ullam facere et. Dolorem et voluptatem molestiae vero et. Minus vero sed et quia. Doloribus quisquam cum corporis molestiae.",

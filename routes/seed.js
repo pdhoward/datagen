@@ -19,6 +19,11 @@ Mongo.connect(url, { useUnifiedTopology: true }, ((err, client) => {
   console.log(b(`MongoDB is Live`))
 }))
 
+const getLocalName = () => {
+  let names = ['Grocery Stores', 'Specialty Retail']
+  return names[Math.floor(Math.random() * names.length)]
+}
+
 const seed = (router) => {
 	router.use(async(req, res, next) => {
 
@@ -70,31 +75,86 @@ const seed = (router) => {
 
       // assign random tags for enterprise, geo, lifestyle        
       if (data.enterprise[0].name == 'local') {
-        newDoc.eid.splice(0, 1, 'local')
+        newDoc.enterprise.splice(0, 1, 'local')
         newDoc.image = 'https://placeimg.com/200/200/arch/grayscale'
       } else {
         let name = data.enterprise[0].name
-        newDoc.eid.splice(0, 1, name )       
+        newDoc.enterprise.splice(0, 1, name )       
         newDoc.image = data.enterprise[0].image
       }      
       let gid = data.geography
-      newDoc.gid.splice(0, 1, gid)
+      newDoc.geography.splice(0, 1, gid)
       let lid = data.lifemode
-      newDoc.lid.splice(0, 1, lid)
+      newDoc.lifemode.splice(0, 1, lid)
 
       // custom assign a market tag based on value of enterprise
-      let ent = newDoc.eid[0]
+      let ent = newDoc.enterprise[0]
       switch(ent) {
-        case 'Marriot':
-          newDoc.mid.splice(0, 1, 'Hotels')
+        case 'Marriott':
+          newDoc.name = "Marriott"
+          newDoc.label = "Marriott"
+          newDoc.market.splice(0, 1, 'Hotels')
           traffic = randomRange(500, 3500)
           newDoc.attributes.map((a) => {
             if (a.id == 42453) a.weeklyTraffic = traffic
             return a
           })
           break;
+        //
+        case 'Publix':
+          newDoc.name = "Publix"
+          newDoc.label = "Publix"
+          newDoc.market.splice(0, 1, 'Supermarkets')
+          traffic = randomRange(2000, 8000)
+          newDoc.attributes.map((a) => {
+            if (a.id == 42453) a.weeklyTraffic = traffic
+            return a
+          })
+          break;
+        case 'Trader Joes':
+          newDoc.name = "Trader Joes"
+          newDoc.label = "Trader Joes"
+          newDoc.market.splice(0, 1, 'Grocery Stores')
+          traffic = randomRange(1000, 3500)
+          newDoc.attributes.map((a) => {
+            if (a.id == 42453) a.weeklyTraffic = traffic
+            return a
+          })
+          break;
+        case 'Circle K':
+          newDoc.name = "Circle K"
+          newDoc.label = "Circle K"
+          newDoc.market.splice(0, 1, 'Speciality Stores')
+          traffic = randomRange(1000, 2500)
+          newDoc.attributes.map((a) => {
+            if (a.id == 42453) a.weeklyTraffic = traffic
+            return a
+          })
+          break;
+        case 'Whole Foods':
+          newDoc.name = "Whole Foods"
+          newDoc.label = "Whole Foods"
+          newDoc.market.splice(0, 1, 'Supermarkets')
+          traffic = randomRange(1000, 4000)
+          newDoc.attributes.map((a) => {
+            if (a.id == 42453) a.weeklyTraffic = traffic
+            return a
+          })
+          break;
+        case 'Kroger':
+          newDoc.name = "Kroger"
+          newDoc.label = "Kroger"
+          newDoc.market.splice(0, 1, 'Supermarkets')
+          traffic = randomRange(2000, 6000)
+          newDoc.attributes.map((a) => {
+            if (a.id == 42453) a.weeklyTraffic = traffic
+            return a
+          })
+          break;
         case 'University of Texas':
-          newDoc.mid.splice(0, 1, 'Education')
+          newDoc.name = "University of Texas"
+          newDoc.label = "UT Satellite Campus"
+          newDoc.market.splice(0, 1, 'Education')
           traffic = randomRange(10000, 30000)
           newDoc.attributes.map((a) => {
             if (a.id == 42453) a.weeklyTraffic = traffic
@@ -103,7 +163,9 @@ const seed = (router) => {
           break
         //
         case 'YMCA':
-          newDoc.mid.splice(0, 1, 'Fitness Centers')
+          newDoc.name = "YMCA"
+          newDoc.label = "YMCA Community Center"
+          newDoc.market.splice(0, 1, 'Fitness Centers')
           traffic = randomRange(8000, 12000)
           newDoc.attributes.map((a) => {
             if (a.id == 42453) a.weeklyTraffic = traffic
@@ -111,7 +173,8 @@ const seed = (router) => {
           })
           break;
         case 'local':
-          newDoc.mid.splice(0, 1,'Grocery Stores')
+          let localName = getLocalName()
+          newDoc.market.splice(0, 1,localName)
           traffic = randomRange(100, 1000)
           newDoc.attributes.map((a) => {
             if (a.id == 42453) a.weeklyTraffic = traffic
@@ -120,7 +183,9 @@ const seed = (router) => {
           break
         //
         case 'Dunkin Donut':
-          newDoc.mid.splice(0, 1,'Specialty Stores')
+          newDoc.name = "Dunkin Donut"
+          newDoc.label = "Dunkin Donut"
+          newDoc.market.splice(0, 1,'Specialty Stores')
           traffic = randomRange(1000, 3000)
           newDoc.attributes.map((a) => {
             if (a.id == 42453) a.weeklyTraffic = traffic
@@ -128,7 +193,7 @@ const seed = (router) => {
           })
           break
         default:
-          newDoc.mid.splice(0, 1,'Supermarkets')
+          newDoc.market.splice(0, 1,'Supermarkets')
           traffic = randomRange(4000, 15000)
           newDoc.attributes.map((a) => {
             if (a.id == 42453) a.weeklyTraffic = traffic
