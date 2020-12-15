@@ -95,8 +95,9 @@ const seed = (router) => {
           newDoc.label = "Marriott"
           newDoc.market.splice(0, 1, 'Hotels')
           traffic = randomRange(500, 3500)
+          newDoc.traffic = traffic
           newDoc.attributes.map((a) => {
-            if (a.id == 42453) a.weeklyTraffic = traffic
+            if (a.id == "weeklytraffic") a.value = traffic
             return a
           })
           break;
@@ -106,8 +107,9 @@ const seed = (router) => {
           newDoc.label = "Publix"
           newDoc.market.splice(0, 1, 'Supermarkets')
           traffic = randomRange(2000, 8000)
+          newDoc.traffic = traffic
           newDoc.attributes.map((a) => {
-            if (a.id == 42453) a.weeklyTraffic = traffic
+            if (a.id == "weeklytraffic") a.value = traffic
             return a
           })
           break;
@@ -116,8 +118,9 @@ const seed = (router) => {
           newDoc.label = "Trader Joes"
           newDoc.market.splice(0, 1, 'Grocery Stores')
           traffic = randomRange(1000, 3500)
+          newDoc.traffic = traffic
           newDoc.attributes.map((a) => {
-            if (a.id == 42453) a.weeklyTraffic = traffic
+            if (a.id == "weeklytraffic") a.value = traffic
             return a
           })
           break;
@@ -126,8 +129,9 @@ const seed = (router) => {
           newDoc.label = "Circle K"
           newDoc.market.splice(0, 1, 'Speciality Stores')
           traffic = randomRange(1000, 2500)
+          newDoc.traffic = traffic
           newDoc.attributes.map((a) => {
-            if (a.id == 42453) a.weeklyTraffic = traffic
+            if (a.id == "weeklytraffic") a.value = traffic
             return a
           })
           break;
@@ -136,8 +140,9 @@ const seed = (router) => {
           newDoc.label = "Whole Foods"
           newDoc.market.splice(0, 1, 'Supermarkets')
           traffic = randomRange(1000, 4000)
+          newDoc.traffic = traffic
           newDoc.attributes.map((a) => {
-            if (a.id == 42453) a.weeklyTraffic = traffic
+            if (a.id == "weeklytraffic") a.value = traffic
             return a
           })
           break;
@@ -146,8 +151,9 @@ const seed = (router) => {
           newDoc.label = "Kroger"
           newDoc.market.splice(0, 1, 'Supermarkets')
           traffic = randomRange(2000, 6000)
+          newDoc.traffic = traffic
           newDoc.attributes.map((a) => {
-            if (a.id == 42453) a.weeklyTraffic = traffic
+            if (a.id == "weeklytraffic") a.value = traffic
             return a
           })
           break;
@@ -156,8 +162,9 @@ const seed = (router) => {
           newDoc.label = "UT Satellite Campus"
           newDoc.market.splice(0, 1, 'Education')
           traffic = randomRange(10000, 30000)
+          newDoc.traffic = traffic
           newDoc.attributes.map((a) => {
-            if (a.id == 42453) a.weeklyTraffic = traffic
+            if (a.id == "weeklytraffic") a.value = traffic
             return a
           })
           break
@@ -167,8 +174,9 @@ const seed = (router) => {
           newDoc.label = "YMCA Community Center"
           newDoc.market.splice(0, 1, 'Fitness Centers')
           traffic = randomRange(8000, 12000)
+          newDoc.traffic = traffic
           newDoc.attributes.map((a) => {
-            if (a.id == 42453) a.weeklyTraffic = traffic
+            if (a.id == "weeklytraffic") a.value = traffic
             return a
           })
           break;
@@ -176,8 +184,9 @@ const seed = (router) => {
           let localName = getLocalName()
           newDoc.market.splice(0, 1,localName)
           traffic = randomRange(100, 1000)
+          newDoc.traffic = traffic
           newDoc.attributes.map((a) => {
-            if (a.id == 42453) a.weeklyTraffic = traffic
+            if (a.id == "weeklytraffic") a.value = traffic
             return a
           })
           break
@@ -187,16 +196,18 @@ const seed = (router) => {
           newDoc.label = "Dunkin Donut"
           newDoc.market.splice(0, 1,'Specialty Stores')
           traffic = randomRange(1000, 3000)
+          newDoc.traffic = traffic
           newDoc.attributes.map((a) => {
-            if (a.id == 42453) a.weeklyTraffic = traffic
+            if (a.id == "weeklytraffic") a.value = traffic
             return a
           })
           break
         default:
           newDoc.market.splice(0, 1,'Supermarkets')
           traffic = randomRange(4000, 15000)
+          newDoc.traffic = traffic
           newDoc.attributes.map((a) => {
-            if (a.id == 42453) a.weeklyTraffic = traffic
+            if (a.id == "weeklytraffic") a.value = traffic
             return a
           })
           break

@@ -22,16 +22,16 @@
 		"termsAndCondition": "Qui sit omnis rerum rerum natus cumque earum qui. Optio facilis doloremque. Corrupti est est aperiam molestias animi animi minima neque. Enim numquam et consectetur dicta error doloribus molestiae quibusdam. Quia est est.",
 		"attributes": [
 			{
-				"id": 42453,
-				"weeklyTraffic": 8000
+				"id": "weeklytraffic",
+				"value": 8000
 			},
 			{
-				"id": 30289,
-				"dailyPeak": "Monday"
+				"id": "dailypeak",
+				"value": "Monday"
 			},
 			{
-				"id": 5821,
-				"venueHours": "https://ogp.me/"
+				"id": "operatinghours",
+				"value": "https://ogp.me/"
 			}			
 		],
 		"images": {
