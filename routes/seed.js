@@ -65,10 +65,10 @@ const seed = (router) => {
       // assign a random store name or the name from spreadsheet
       if (f.name == null) {
         newDoc.name = newRandomNames[Math.floor(Math.random() * newRandomNames.length)]       
-        newDoc.title = newDoc.name
+        newDoc.label = newDoc.name
       } else {
         newDoc.name = f.name
-        newDoc.title = f.name
+        newDoc.label = f.name
         newDoc.website = f.website
         newDoc.phone = f.phone
       }
