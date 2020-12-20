@@ -10,6 +10,8 @@
 			"verifiedMethod": "inspection",
 			"result": true
 		},
+		"type": "Venue",
+		"monitors": "",
 		"label": "Corner Grocery Store",
 		"name": "Corner Grocery Store",
 		"slug": "",
